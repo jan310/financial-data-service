@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:17.4:///test-db
+
+external-api:
+  open-exchange-rates:
+    base-url: localhost:1234
+    app-id: test-app-id

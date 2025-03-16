@@ -1,6 +1,9 @@
 spring:
   application:
     name: financial-data-service
+  cache:
+    cache-names: usdExchangeRates
+    type: caffeine
   datasource:
     url: jdbc:postgresql://localhost:5432/financial-data-db
     username: ${POSTGRES_USER}
@@ -14,4 +17,5 @@ spring:
 
 external-api:
   open-exchange-rates:
+    base-url: https://openexchangerates.org
     app-id: ${OPEN_EXCHANGE_RATES_APP_ID}
