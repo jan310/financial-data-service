@@ -18,26 +18,27 @@ repositories {
     mavenCentral()
 }
 
-extra["snippetsDir"] = file("build/generated-snippets")
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.flywaydb:flyway-core")
-    implementation("org.flywaydb:flyway-database-postgresql")
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:postgresql")
+    testImplementation("org.wiremock:wiremock-standalone:3.12.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+// To generate the documentation, run: ./gradlew clean asciidoctor
+// The adoc-snippets will be created in the build/generated-snippets folder
+// The documentation will be created in the build/docs/asciidoc folder
+
+extra["snippetsDir"] = file("build/generated-snippets")
 
 tasks.test {
     outputs.dir(project.extra["snippetsDir"]!!)
@@ -46,4 +47,5 @@ tasks.test {
 tasks.asciidoctor {
     inputs.dir(project.extra["snippetsDir"]!!)
     dependsOn(tasks.test)
+    attributes(mapOf("snippets" to project.extra["snippetsDir"]!!))
 }

@@ -1,0 +1,16 @@
+:toc: left
+
+= Financial Data Service API Documentation
+
+:sectnums:
+
+== Exchange Rate API
+=== Currency Conversion
+==== Request
+include::{snippets}/exchange-rate/convert_success/http-request.adoc[]
+==== Response - Success
+include::{snippets}/exchange-rate/convert_success/http-response.adoc[]
+==== Response - Error: Invalid Request Data
+include::{snippets}/exchange-rate/convert_error-invalid_request_data/http-response.adoc[]
+==== Response - Error: Fetching Exchange Rates Failed
+include::{snippets}/exchange-rate/convert_error-fetching_exchange_rates_failed/http-response.adoc[]
